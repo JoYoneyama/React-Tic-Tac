@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function Square({value, onSquareClick}){                 // funcao para cada quadrado no jogo
     return (
         <>
@@ -8,10 +6,8 @@ function Square({value, onSquareClick}){                 // funcao para cada qua
     )
 }
 
-export function Board(){             // tabela do jogo
+export function Board({ xIsNext, squares, onPlay }){             // tabela do jogo
 
-    const [xIsNext, setXIsNext] = useState(true);          // para alternar entre X e O
-    const [squares, setSquares] = useState(Array(9).fill(null));   // array com o valor de cada quadrado
     const winner = calculateWinner(squares);
     let status;
 
@@ -41,9 +37,11 @@ export function Board(){             // tabela do jogo
             nextSquares[i] = "O";
 
         }
+
+        onPlay(nextSquares);
         
-        setSquares(nextSquares);      // muda o valor do array squares com o valor da copia nextSquares
-        setXIsNext(!xIsNext);        // ! inverte o valor booleano do xIsNext  
+        // setSquares(nextSquares);      // muda o valor do array squares com o valor da copia nextSquares
+        // setXIsNext(!xIsNext);        // ! inverte o valor booleano do xIsNext  
     }
 
     function calculateWinner(squares){      // funcao para verificar se tem um vencedor
