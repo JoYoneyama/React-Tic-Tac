@@ -1,7 +1,26 @@
+import "./Board.css"
+
 function Square({value, onSquareClick}){                 // funcao para cada quadrado no jogo
+    
+    let XO;           // usando essa variavel para conseguir inserir os svg
+
+    if (value == "X"){
+
+        XO = <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="4 1 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+             </svg>;
+
+    }else if (value == "O"){
+
+        XO = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+             </svg>;
+
+    }
+
     return (
         <>
-            <button className="square" onClick={onSquareClick}>{value}</button>
+            <button className="square" onClick={onSquareClick}>{XO}</button>
         </>
     )
 }
@@ -11,9 +30,13 @@ export function Board({ xIsNext, squares, onPlay }){             // tabela do jo
     const winner = calculateWinner(squares);
     let status;
 
-    if (winner) {                        // se tiver um vencedor, mostra quem venceu
+    if (winner && winner != "Draw") {                        // se tiver um vencedor, mostra quem venceu
 
-        status = "Winner: " + winner;             
+        status = "Winner: " + winner;    
+
+    }else if(winner == "Draw"){
+
+        status = winner;
 
     }else{             // se n, mostra quem é o proximo a jogar
 
@@ -69,7 +92,15 @@ export function Board({ xIsNext, squares, onPlay }){             // tabela do jo
 
         }
 
-        return null;         // se n, ele retorna nada
+        if (squares.includes(null)) {        // o operador in n funciona do msm jeito como em python
+
+            return null;         // se n, ele retorna nada
+
+        }else{                  // para mostrar quando for empate
+
+            return "Draw";
+
+        }
 
     }
 ''

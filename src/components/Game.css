@@ -1,0 +1,15 @@
+.game{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+}
+
+.game-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.game-info ol Button{
+    margin-top: 1vh;
+}

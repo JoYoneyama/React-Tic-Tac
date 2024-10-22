@@ -1,5 +1,7 @@
 import { Board } from "./Board"
 import { useState } from "react"
+import { OutlineButtons } from "./OutlineButtons"
+import "./Game.css"
 
 export function Game(){
 
@@ -23,7 +25,7 @@ export function Game(){
 
     }
 
-    const moves = history.map((squares, move) => {
+    const moves = history.map((squares, move) => {   // mapeamento de cada movimento do jogo
 
         let description;
 
@@ -39,8 +41,8 @@ export function Game(){
 
         return(
             <li key={move}>
-                <button onClick={() => jumpTo(move)}>{description}</button>
-            </li>
+                <OutlineButtons onClick={() => jumpTo(move)} description={description}/>
+            </li> 
         );
     }) 
 
